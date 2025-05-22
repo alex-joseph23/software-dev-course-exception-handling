@@ -56,7 +56,22 @@ while (true) {
     }
     if (action === "add") {
         let animal = readlineSync.question("Enter the animal's name: ");
+        try {
+            if (!animal === "string") {
+                throw new Error ('Not a valid name');
+            }
+        } catch (err) {
+            console.log(err);
+        }
+
         let fee = Number(readlineSync.question("Enter the adoption fee: "));
+        try {
+            if (fee !== Number(fee) && fee < 0) {
+                throw new Error('Not a valid adoption fee.');
+            }
+        } catch (err) {
+            console.log(err);
+        }
         addAnimal(animal, fee);
         console.log(`${animal} added with a fee of $${fee}.`);
     } else if (action === "fee") {
